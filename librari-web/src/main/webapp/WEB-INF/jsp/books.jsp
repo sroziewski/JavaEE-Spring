@@ -1,16 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<spring:message code="books.publisher.title" var="booksPublisherTitle"/>
+
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="Books For Publisher ${publisher.name}"/>
+    <jsp:param name="title" value="${booksPublisherTitle} ${publisher.name}"/>
 </jsp:include>
+
    <table>
        <tr>
-           <th>Title</th>
-           <th>Author</th>
-           <th>Cover</th>
-           <th>Price</th>
-           <th>View</th>
-           <th>Publisher</th>
+           <th><spring:message code="book.title"/></th>
+           <th><spring:message code="book.author"/></th>
+           <th><spring:message code="book.cover"/></th>
+           <th><spring:message code="book.price"/></th>
+           <th><spring:message code="book.view"/></th>
+           <th><spring:message code="book.publisher"/></th>
        </tr>
        <%--<%--%>
            <%--for(Publisher p : (List<Publisher>)request.getAttribute("publishers")){--%>

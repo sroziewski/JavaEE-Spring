@@ -6,11 +6,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<spring:message code="publishers.list.title" var="publishersListTitle"/>
+
     <%--BrowsingService bs = new BrowsingServiceImpl();--%>
     <%--List<Publisher> publishers = bs.getPublishers();--%>
 <%--%>--%>
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="List Of Publishers"/>
+    <jsp:param name="title" value="${publishersListTitle}"/>
 </jsp:include>
    <table>
        <tr>
