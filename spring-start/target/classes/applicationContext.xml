@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="element" class="lab.spring.Candies" lazy-init="true" scope="prototype">
+        <property name="description" value="My Value from AppContext"/>
+    </bean>
+    <bean id="box" class="lab.spring.Box" lazy-init="true">
+        <property name="element" ref="element"/>
+    </bean>
+</beans>
