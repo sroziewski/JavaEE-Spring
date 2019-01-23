@@ -3,12 +3,14 @@ package lab.librari.dao.impl;
 import lab.librari.dao.BooksDAO;
 import lab.librari.model.Book;
 import lab.librari.model.Publisher;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+@Repository // for DAOs..., semantically better than Component
 public class InMemoryBooksDAO implements BooksDAO {
 
     private Logger logger = Logger.getLogger(InMemoryBooksDAO.class.getName());

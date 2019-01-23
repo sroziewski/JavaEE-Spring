@@ -2,15 +2,24 @@ package lab.librari.dao;
 
 import lab.librari.dao.impl.InMemoryBooksDAO;
 import lab.librari.model.Publisher;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+//@ComponentScan("lab.librari")
 public class BooksDAOStarter {
 
     public static void main(String[] args) {
         System.out.println("BooksDAOStarter.main");
 
-        BooksDAO dao = new InMemoryBooksDAO();
+//        ApplicationContext context = new AnnotationConfigApplicationContext(BooksDAOStarter.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext("lab.librari");
+
+//        BooksDAO dao = new InMemoryBooksDAO();
+        BooksDAO dao = context.getBean(BooksDAO.class);
 
         List<Publisher> publishers = dao.getAllPublishers();
 
