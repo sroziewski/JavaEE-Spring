@@ -2,13 +2,8 @@
 <%@ page import="lab.librari.service.api.BrowsingService" %>
 <%@ page import="lab.librari.service.impl.BrowsingServiceImpl" %>
 <%@ page import="lab.librari.model.Publisher" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Uczestnik
-  Date: 21.01.2019
-  Time: 14:18
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <%--BrowsingService bs = new BrowsingServiceImpl();--%>
@@ -19,8 +14,8 @@
 </jsp:include>
    <table>
        <tr>
-           <th>Name</th>
-           <th>Logo</th>
+           <th><spring:message code="publisher.name"/></th>
+           <th><spring:message code="publisher.logo"/></th>
        </tr>
        <%--<%--%>
            <%--for(Publisher p : (List<Publisher>)request.getAttribute("publishers")){--%>

@@ -7,16 +7,19 @@ import lab.librari.model.Book;
 import lab.librari.model.Page;
 import lab.librari.model.Publisher;
 import lab.librari.service.api.BrowsingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-
+@Service
 public class BrowsingServiceImpl implements BrowsingService {
 
     Logger logger = Logger.getLogger(BrowsingServiceImpl.class.getName());
 
-    private static BooksDAO bDao = new InMemoryBooksDAO();
+    @Autowired
+    private BooksDAO bDao = new InMemoryBooksDAO();
 
     public List<Publisher> getPublishers() {
         return bDao.getAllPublishers();
