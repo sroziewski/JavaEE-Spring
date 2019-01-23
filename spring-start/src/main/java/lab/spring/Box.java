@@ -8,6 +8,10 @@ public class Box {
         System.out.println("Box has been constructed");
     }
 
+    public Box(Element element) {
+        this.element = element;
+    }
+
     public Element getElement() {
         return element;
     }

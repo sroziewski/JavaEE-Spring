@@ -17,11 +17,11 @@ public class SpringStarter {
 
 //        Box box = (Box) context.getBean("box");
         Box box = context.getBean(Box.class);
-        System.out.println("["+box.describeContent()+"]");
+        System.out.println("[Box: "+box.describeContent()+"]");
         Box box2 = context.getBean(Box.class);
-        System.out.println("["+box2.describeContent()+"]");
-        Element candies = context.getBean(Element.class);
-        System.out.println("["+candies.getDescription()+"]");
+        System.out.println("[Box2: "+box2.describeContent()+"]");
+        Element candies = (Element) context.getBean("element");
+        System.out.println("[Element: "+candies.getDescription()+"]");
 
     }
 }

@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="element" class="lab.spring.Candies" lazy-init="true" scope="prototype">
-        <property name="description" value="My Value from AppContext"/>
-    </bean>
-    <bean id="box" class="lab.spring.Box" lazy-init="true">
-        <property name="element" ref="element"/>
+    <!--<bean id="candies" name="c1,c2,c3" class="lab.spring.Candies" lazy-init="false" scope="prototype">-->
+        <!--&lt;!&ndash;<constructor-arg value="Constructor from AppCnt"/>&ndash;&gt;-->
+        <!--<property name="descriptions" ref="candiesList"/>-->
+    <!--</bean>-->
+    <bean id="candies" class="lab.spring.Candies" p:descriptions-ref="candiesList"/>
+    <util:list id="candiesList">
+        <value>First Candy</value>
+        <value>Second Candy</value>
+        <value>Third Candy</value>
+        <value>Fourth Candy</value>
+    </util:list>
+    <!--<bean id="element2" class="lab.spring.Candies" lazy-init="false" scope="prototype">-->
+        <!--&lt;!&ndash;<property name="description"><null></null></property>&ndash;&gt;-->
+        <!--<property name="description" value="#{null}"/>-->
+    <!--</bean>-->
+    <!--<bean id="box" class="lab.spring.Box" lazy-init="true">-->
+        <!--<property name="element" ref="element"/>-->
+    <!--</bean>-->
+
+    <alias name="candies" alias="element"/>
+    <bean id="box" class="lab.spring.Box" lazy-init="true" scope="prototype">
+        <constructor-arg ref="element"/>
     </bean>
 </beans>
