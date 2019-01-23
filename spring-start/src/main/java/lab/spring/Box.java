@@ -10,7 +10,7 @@ public class Box {
     @Autowired
 //    @Qualifier("candies")
 //    @Qualifier("sweets") // same results
-    @SweetQualifier // our own q., same results
+//    @SweetQualifier // our own q., same results
     private Element element;
 
     public Box() {

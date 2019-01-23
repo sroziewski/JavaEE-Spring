@@ -11,7 +11,7 @@
     <!--<bean id="candies" class="lab.spring.Candies" p:descriptions-ref="candiesList"/>-->
 
     <context:annotation-config/>
-    <context:component-scan base-package="lab.spring"/>
+    <!--<context:component-scan base-package="lab.spring"/>-->
 
 
     <!--<bean id="candies" class="lab.spring.Candies" autowire="byType"/>-->
@@ -34,7 +34,7 @@
         <!--<property name="element" ref="element"/>-->
     <!--</bean>-->
 
-    <alias name="candies" alias="element"/>
+    <!--<alias name="candies" alias="element"/>-->
     <!--<bean id="box" class="lab.spring.Box" autowire="byType"/>-->
     <!--<bean id="box" class="lab.spring.Box" autowire="byName"/>-->
 
