@@ -18,9 +18,9 @@ public class BookValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Book book = (Book) o;
 
-        if(book.getPrice()<=0){
-            errors.rejectValue("price", "error.book.price.negative");
-        }
+//        if(book.getPrice()<=0){
+//            errors.rejectValue("price", "error.book.price.negative");
+//        }
 //        if(book.getTitle()==null||book.getTitle().trim().isEmpty()){
 //            br.rejectValue("title", "error.book.title.empty");
 //        } // below is same result

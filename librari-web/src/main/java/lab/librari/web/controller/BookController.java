@@ -53,8 +53,8 @@ public class BookController {
     @PostMapping("/add") // dont use getBooks method manually! F5 can will add more... in URL retains add method!
     public String addBook(
             @ModelAttribute("bookForm") @Validated Book book,
-            @SessionAttribute("publisher") Publisher publisher,
-            BindingResult br
+            BindingResult br,
+            @SessionAttribute("publisher") Publisher publisher
     ){
         logger.info("BookController:addBook, book: "+book+", publisher: "+publisher);
 

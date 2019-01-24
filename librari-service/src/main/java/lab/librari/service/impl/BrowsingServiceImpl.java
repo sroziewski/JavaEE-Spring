@@ -52,11 +52,13 @@ public class BrowsingServiceImpl implements BrowsingService {
         return bDao.addPublisher(p);
     }
 
-
-
     public Book addBook(Publisher p, Book b) {
 
         logger.info("about to add publisher " + p + " and book " + b);
+
+        if(b.getPrice()<=0){
+            throw  new IllegalArgumentException("negative price");
+        }
 
         p = p.getId() == null ? bDao.addPublisher(p) : bDao.getPublisherById(p.getId());
         b.setPublisher(p);
