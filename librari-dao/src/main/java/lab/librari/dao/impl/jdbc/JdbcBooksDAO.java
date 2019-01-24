@@ -6,6 +6,8 @@ import lab.librari.model.Book;
 import lab.librari.model.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -50,6 +52,15 @@ public class JdbcBooksDAO implements BooksDAO {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<Publisher> publisherRowMapper = new PublisherMapper();
+    // if an object represents data, it should not be autowired, constructors arent so that bad ;)
+    // this object has not any state, so we can make it once and reuse...
+
+/*
+    Pure JDBC below... a lot of work
     @Override
     public List<Publisher> getAllPublishers() {
         List<Publisher> publishers = new ArrayList<Publisher>();
@@ -65,6 +76,12 @@ public class JdbcBooksDAO implements BooksDAO {
         }
 
         return publishers;
+    }  */
+
+    @Override // now we use JDBC from Spring Framework, though using ORM is a better approach
+    public List<Publisher> getAllPublishers() {
+        List<Publisher> publishers = jdbcTemplate.query(SELECT_ALL_PUBLISHERS, publisherRowMapper);
+        return publishers;
     }
 
     @Override
@@ -76,7 +93,7 @@ public class JdbcBooksDAO implements BooksDAO {
 
         Publisher p = null;
         try(Connection con = this.dataSource.getConnection();
-            PreparedStatement prpstm = con.prepareStatement(SELECT_PUBLISHER_BY_ID);) {
+            PreparedStatement prpstm = con.prepareStatement(SELECT_PUBLISHER_BY_ID);) { // try with resources
             prpstm.setLong(1, id);
             ResultSet rs = prpstm.executeQuery();
             if(rs.next()) {
@@ -140,7 +157,7 @@ public class JdbcBooksDAO implements BooksDAO {
         return p;*/
     }
 
-    public Book addBook(Book m) {
+/*    public Book addBook(Book m) {
 
         try(Connection con = this.dataSource.getConnection();
             PreparedStatement prpstm = con.prepareStatement(INSERT_PUBLISHER_BOOK);) {
@@ -159,6 +176,21 @@ public class JdbcBooksDAO implements BooksDAO {
             logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
         }
         return m;
+    }   */
+
+// same, but using jdbc from springframework, JDBC is not legacy, JDBC Spring it not legacy too, for some reasons architects may want to use it, for more effective SQL queries...
+    public Book addBook(Book b) {
+
+
+        jdbcTemplate.update(
+                INSERT_PUBLISHER_BOOK,
+                b.getTitle(),
+                b.getAuthor(),
+                b.getCover(),
+                b.getPrice(),
+                b.getPublisher().getId() // but we need keyHolder API, more complicated, we need a primary key
+                );
+        return b;
     }
 
     private Publisher mapPublisher(ResultSet rs) throws SQLException {
