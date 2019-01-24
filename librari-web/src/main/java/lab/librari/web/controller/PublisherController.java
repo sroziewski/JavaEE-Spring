@@ -5,7 +5,7 @@ import lab.librari.service.api.BrowsingService;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,7 +21,8 @@ public class PublisherController {
     @Autowired
     private BrowsingService bs;
 
-    @RequestMapping(value = "/publishers", method = RequestMethod.GET)
+//    @RequestMapping(value = "/publishers", method = RequestMethod.GET)
+    @GetMapping("/publishers") // same result, spring 5
     public String getPublishers(Model model){ // method name doesnt have any meaning
         logger.info("PublisherController:getPublishers by mapping value = \"/publishers\", method = RequestMethod.GET");
         List<Publisher> publishers = bs.getPublishers();

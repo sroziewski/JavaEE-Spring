@@ -33,12 +33,17 @@
                <a href="${p.view}" target="_blank">Details</a>
                </c:if>
            </td>
-           <td>${publisher.name}</td>
+           <td>${p.publisher.name}</td>
        </tr>
        </c:forEach>
        </c:if>
        <c:if test="${empty requestScope.books}">
            <tr><td colspan="6">Not Found</td></tr>
        </c:if>
+       <tr>
+           <td colspan="6" >
+               <a href="<c:url value='/books/add?publisherId=${publisherId}'/>">+</a>
+           </td>
+       </tr>
    </table>
 <jsp:include page="footer.jsp"/>

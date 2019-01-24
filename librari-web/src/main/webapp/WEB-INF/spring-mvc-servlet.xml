@@ -27,7 +27,7 @@
             <property name="paramName" value="lang"/>
         </bean>
         <bean class="lab.librari.web.controller.TimeInterceptor">
-            <property name="opening" value="10"/>
+            <property name="opening" value="9"/>
             <property name="closing" value="17"/>
         </bean>
     </mvc:interceptors>
