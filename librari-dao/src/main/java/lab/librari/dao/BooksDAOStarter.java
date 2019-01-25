@@ -19,10 +19,10 @@ public class BooksDAOStarter {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(BooksDAOStarter.class);
 //        ApplicationContext context = new AnnotationConfigApplicationContext("lab.librari");
 
-        BooksDAO dao = new JPABooksDAO(); // this time we cont use spring
+        BooksDAO dao = new JPABooksDAO(); // this time we dont use spring
 
 //        BooksDAO dao = new InMemoryBooksDAO();
-//        BooksDAO dao = context.getBean(BooksDAO.class);
+//        BooksDAO dao = context.getBean(BooksDAO.class); // this time we dont use spring
 
         List<Publisher> publishers = dao.getAllPublishers();
 

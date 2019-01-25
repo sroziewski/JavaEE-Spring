@@ -27,6 +27,11 @@ public class PublisherREST {
         return bs.getBooksForPublisher(publisherId);
     }
 
+    @GetMapping("/publishers/{pn}/{ps}") List<Publisher> getPublishersPage(@PathVariable("pn") int pageNumber, @PathVariable("ps") int pageSize){
+        return bs.getPublishersPage(pageNumber, pageSize).getItems();
+    }
+
+
     @GetMapping("/publishers/{id}") Publisher getPublisher(@PathVariable("id") long publisherId){
         return bs.getPublisher(publisherId);
     }

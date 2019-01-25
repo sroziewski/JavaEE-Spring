@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Repository
-@Primary // because we have more "same" DAOs...
+//@Primary // because we have more "same" DAOs...
 public class JdbcBooksDAO implements BooksDAO {
 
     public static final Logger logger = Logger.getLogger(JdbcBooksDAO.class.getName());

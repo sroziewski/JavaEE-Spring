@@ -23,7 +23,7 @@ public class Book implements Serializable{
     @Transient // we eliminate this field from SQL, because we dont hav it in our DB
     private String view;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)  // many books can have the same publisherId, lazy -- if we call getter for publisher only -- data will be fetched, dynamic proxy to objects
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)  // many books can have the same publisherId, lazy -- if we call getter for publisher only -- data will be fetched, dynamic proxy to objects
     @JoinColumn(name = "publisher_id")
     private Publisher publisher; // publisher_id -- by default
 

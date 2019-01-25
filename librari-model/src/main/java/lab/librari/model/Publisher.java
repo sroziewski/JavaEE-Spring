@@ -21,7 +21,7 @@ public class Publisher {
     @Column(name = "LOGOIMAGE")
     private String logoImage; // logo_image
 
-    @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY) // backing/reflexive relation
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER) // backing/reflexive relation
     private List<Book> books = new ArrayList<>();
 
 

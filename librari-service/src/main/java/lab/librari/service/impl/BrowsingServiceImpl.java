@@ -9,6 +9,10 @@ import lab.librari.model.Publisher;
 import lab.librari.service.api.BrowsingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,6 +24,9 @@ public class BrowsingServiceImpl implements BrowsingService {
 
     @Autowired
     private BooksDAO bDao = new InMemoryBooksDAO();
+
+    @Autowired
+    private PlatformTransactionManager tm;
 
     public List<Publisher> getPublishers() {
         return bDao.getAllPublishers();
@@ -52,17 +59,25 @@ public class BrowsingServiceImpl implements BrowsingService {
         return bDao.addPublisher(p);
     }
 
+    @Transactional(rollbackFor = Exception.class) // now we make a transaction only by annotation, by runtime
     public Book addBook(Publisher p, Book b) {
 
         logger.info("about to add publisher " + p + " and book " + b);
 
+//        TransactionStatus ts = tm.getTransaction(new DefaultTransactionDefinition());
+
         if(b.getPrice()<=0){
+//            tm.rollback(ts);
             throw  new IllegalArgumentException("negative price");
         }
+
+// <tx:annotation-driven/> in daoContext.xml
 
         p = p.getId() == null ? bDao.addPublisher(p) : bDao.getPublisherById(p.getId());
         b.setPublisher(p);
         b = bDao.addBook(b);
+
+//        tm.commit(ts); // we can handle possible exceptions
 
         return b;
     }
