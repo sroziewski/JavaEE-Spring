@@ -43,7 +43,6 @@
                 invalidate-session="true"
                 logout-success-url="/publishers"
                 delete-cookies="JSESSIONID" />
-        <security:form-login authentication-success-forward-url="/publishers"/>
     </security:http>
 
     <security:authentication-manager>
