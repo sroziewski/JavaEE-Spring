@@ -8,6 +8,7 @@ import lab.librari.model.Page;
 import lab.librari.model.Publisher;
 import lab.librari.service.api.BrowsingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -60,6 +61,7 @@ public class BrowsingServiceImpl implements BrowsingService {
     }
 
     @Transactional(rollbackFor = Exception.class) // now we make a transaction only by annotation, by runtime
+    @PreAuthorize("hasAuthority('ADMIN')") // will pop up an authorization window if not logged in
     public Book addBook(Publisher p, Book b) {
 
         logger.info("about to add publisher " + p + " and book " + b);
