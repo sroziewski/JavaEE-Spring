@@ -1,12 +1,15 @@
 package lab.librari.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 
-
+@Entity
 public class Book implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -17,9 +20,12 @@ public class Book implements Serializable{
 
     private int price;
 
+    @Transient // we eliminate this field from SQL, because we dont hav it in our DB
     private String view;
 
-    private Publisher publisher;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)  // many books can have the same publisherId, lazy -- if we call getter for publisher only -- data will be fetched, dynamic proxy to objects
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher; // publisher_id -- by default
 
     // don't use parametrized constructors - required for in-memory mockup only
     public Book(Long id, String title, String author, String cover, int price, Publisher servedIn) {

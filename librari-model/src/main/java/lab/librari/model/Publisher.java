@@ -1,22 +1,28 @@
 package lab.librari.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
+@Entity
+@Table(name = "PUBLISHER")
+public class Publisher {
 
-public class Publisher implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // we dont want to manage ids
     private Long id;
 
-    private String name;
+    private String name; // by default there are treated as columns
 
-    private String logoImage;
+    @Column(name = "LOGOIMAGE")
+    private String logoImage; // logo_image
 
-    private List<Book> books = new ArrayList<Book>();
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY) // backing/reflexive relation
+    private List<Book> books = new ArrayList<>();
 
 
     // don't use parametrized constructors - required for in-memory mockup only

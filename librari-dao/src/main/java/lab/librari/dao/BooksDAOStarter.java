@@ -1,6 +1,7 @@
 package lab.librari.dao;
 
 import lab.librari.dao.impl.InMemoryBooksDAO;
+import lab.librari.dao.impl.jpa.JPABooksDAO;
 import lab.librari.model.Publisher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,10 +17,12 @@ public class BooksDAOStarter {
         System.out.println("BooksDAOStarter.main");
 
 //        ApplicationContext context = new AnnotationConfigApplicationContext(BooksDAOStarter.class);
-        ApplicationContext context = new AnnotationConfigApplicationContext("lab.librari");
+//        ApplicationContext context = new AnnotationConfigApplicationContext("lab.librari");
+
+        BooksDAO dao = new JPABooksDAO(); // this time we cont use spring
 
 //        BooksDAO dao = new InMemoryBooksDAO();
-        BooksDAO dao = context.getBean(BooksDAO.class);
+//        BooksDAO dao = context.getBean(BooksDAO.class);
 
         List<Publisher> publishers = dao.getAllPublishers();
 
