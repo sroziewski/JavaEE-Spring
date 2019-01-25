@@ -3,6 +3,7 @@
 <%@ page import="lab.librari.service.api.BrowsingService" %>
 <%@ page import="lab.librari.service.impl.BrowsingServiceImpl" %>
 <%@ page import="lab.librari.model.Publisher" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Uczestnik
@@ -22,6 +23,11 @@
 <header>
     <h1><a href="<c:url value="/publishers"/>">Librari</a></h1>
     <h2>${param.title}</h2>
-    <h3></h3>
+    <h3>
+        <security:authorize access="isAuthenticated()">
+            <security:authentication property="principal.username" var="username"/>
+        </security:authorize>
+        ${username}
+    </h3>
 </header>
 <section>
